@@ -4,11 +4,22 @@ import { TURNS } from './constants'
 import { checkWinner, checkGame } from './logic/board'
 import { Result } from './components/result'
 import { GameBoard } from './components/gameBoard'
+import { saveGame, clearBoard } from './logic/storage'
 import './App.css'
 
+
 function App() {
-  const [board, setBoard] = useState(Array(9).fill(null))
-  const [turn, setTurn] = useState(TURNS.X)
+  const [board, setBoard] = useState (()=>{
+    const boardSaved = window.localStorage.getItem('board')
+    console.log(boardSaved);
+      return  boardSaved ? JSON.parse(boardSaved) : Array(9).fill(null)
+  })
+  
+  const [turn, setTurn] = useState(()=>{
+    const turnSaved = window.localStorage.getItem('turn')
+      return  turnSaved ? JSON.parse(turnSaved) : TURNS.X
+  })
+
   const [winner, setWinner] = useState(null)
 
  
@@ -22,6 +33,8 @@ function App() {
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
     
+    saveGame({board:newBoard,turn:newTurn})
+   
     const win = checkWinner(newBoard);
     if(win){
       setWinner(win)
@@ -35,6 +48,8 @@ function App() {
     setTurn(winner !== null ? winner : TURNS.X )
     setWinner(null)
     setBoard(Array(9).fill(null))
+
+    clearBoard(winner)
   }
 
 
