@@ -20,7 +20,6 @@ export const WINNER_COMBOS = [
 ]
 
 const Square = ({children, isSelected,isfilled, updateBoard, index}) => {
-  console.log(children, index, isSelected, children === '❌' && isSelected)
   const handleClick = () => {
     updateBoard(index);
   }
@@ -67,17 +66,19 @@ function App() {
     const newBoard = [...board]
     newBoard[index] = turn
     setBoard(newBoard);
+
+    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
+    setTurn(newTurn)
     
     const win = checkWinner(newBoard);
+    console.log(win)
     if(win){
-      setWinner((win) => {
-        return win
-      })
+      setWinner(win)
+      console.log('Gano')
     }
-    else{
-      const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
-      setTurn(newTurn)
-    }
+    // else{
+     
+    // }
   }
 
   return (
@@ -99,6 +100,25 @@ function App() {
           <Square isSelected = {turn === TURNS.O}>{TURNS.O}</Square>
         </section>
       </main>
+      
+      {
+        winner !== null && (
+          <section className='winner'>
+            <div className='text'>
+              <h2>
+                { winner === false ? 'Tie' : 'The winner is: '}
+              </h2>
+            </div>
+            <header className='win'>
+              {winner && <Square>{winner}</Square>}
+            </header>
+            <footer>
+              <button>Play again!</button>
+            </footer>
+          </section>
+        )
+      }
+     
     </>
   )
 }
