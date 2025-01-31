@@ -5,14 +5,15 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #E3E3E3;
+  background: #0C1017;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  margin: 0px;
 }
 
 body {
@@ -33,35 +34,55 @@ body {
   width: fit-content;
   margin: 40px auto;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
 }
 
-.board h1 {
+.board .game-logo{
+  width: 80px;
+  height: 80px;
+  margin-bottom: 32px;
+}
+.board .restart-button{
+  border-color: #212835;
+  width: 100%;
+}
+
+.board h2 {
   color: #eee;
   margin-bottom: 16px;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .board button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 8px 12px;
   margin: 25px;
   background: transparent;
-  border: 2px solid #eee;
+  border: 2px solid transparent;
+  gap: 8px;
   color: #eee;
   width: 100px;
   border-radius: 5px;
   transition: 0.2s;
-  font-weight: bold;
   cursor: pointer;
 }
 
+
 .board button:hover {
-  background: #eee;
-  color: #222;
+  background: #212835;
 }
 
 .board .game {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  border-radius: 20px;
 }
 
 .turn {
@@ -73,6 +94,17 @@ body {
   border-radius: 10px;
 }
 
+.fixed-image {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  width: 500px;
+  max-width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
 .turn .square,
 .winner .square {
   width: 70px;
@@ -81,57 +113,76 @@ body {
   border-color: transparent;
 }
 
-.square.is-selected {
-  color: #fff;
-  background: #09f;
-}
-
-.winner {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  display: grid;
-  place-items: center;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.winner .text {
-  background: #111;
-  height: 300px;
-  width: 320px;
-  border: 2px solid #eee;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
-
-.winner .win {
-  margin: 0 auto;
-  width: fit-content;
-  border-radius: 10px;
-  display: flex;
-  gap: 15px;
-}
 
 .square {
   width: 100px;
   height: 100px;
-  border: 2px solid #eee;
-  border-radius: 5px;
+  border: 2px solid #212835;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
   display: grid;
   place-items: center;
   cursor: pointer;
   font-size: 48px;
 }
 
-.square.equis{
-  border-color: red;
+.equis{
+  color: #E45651;
+  border-color: #E45651;
+  background-color: rgba(228, 86, 81, 0.1);
 }
-.square.circle{
-  border-color: #09f;
+
+.circle{
+  color: #225577;
+  border: 2px solid #225577 !important;
+  background-color: rgba(70, 163, 255, 0.1);
+}
+
+.stats-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.stat {
+  margin: 0 10px;
+}
+
+.number {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.label {
+  font-size: 14px;
+  color: gray;
+}
+
+.divider {
+  width: 1px;
+  height: 30px;
+  background-color: lightgray;
+}
+
+.results{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 24px;
+  width: 100%;
+  gap: 8px;
+}
+
+/* Estilos específicos para dispositivos móviles */
+@media (max-width: 1000px) {
+  .fixed-image {
+    position: relative;
+    width: 100%; 
+    height: auto; 
+    margin-top: 20px;
+  }
 }

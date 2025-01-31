@@ -10,3 +10,6 @@ export const clearBoard = (winner) => {
     window.localStorage.setItem('turn',  JSON.stringify(winner !== null ? winner : TURNS.X ))
 }
 
+export const saveScore = (scores) =>{
+    window.localStorage.setItem('scores',scores)
+}

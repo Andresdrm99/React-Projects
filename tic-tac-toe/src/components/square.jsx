@@ -4,7 +4,7 @@ export const Square = ({children, isSelected, updateBoard, index}) => {
     updateBoard(index);
   }
 
-  const selected = `square ${
+  const selected = ` ${
   index === undefined 
     ? isSelected 
       ? 'is-selected' 
@@ -16,7 +16,7 @@ export const Square = ({children, isSelected, updateBoard, index}) => {
     : ''
 }`
   return (
-    <div className= {selected} onClick={handleClick}>
+    <div className= {'square' + selected} onClick={handleClick}>
       {children}
     </div>
   )

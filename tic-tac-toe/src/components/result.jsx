@@ -1,21 +1,27 @@
-import { Square } from "./square.jsx"
-export function Result ({winner, playAgain})
+import { TURNS } from "../constants.jsx"
+export function Result ({winner, turn, scores})
 {
-    if (winner === null) return null
-
     return(
-        <section className='winner'>
-            <div className='text'>
-                <h2>
-                    { winner === false ? 'Tie' : 'The winner is: '}
-                </h2>
-                <header className='win'>
-                    {winner && <Square>{winner}</Square>}
-                </header>
-                <footer>
-                    <button onClick={playAgain}>Play again!</button>
-                </footer>
-            </div>            
+        <section className="results" >      
+            <h2 className="turnResult">
+                { winner === null ? 'Turn of player ' + turn : winner === false ? 'It\'s a draw' : winner === TURNS.X ?  'Congratulations player X': 'Congratulations player O'}
+            </h2>
+            <div className="stats-container">
+            <div className="stat">
+                <div className="number">{scores.playerX}</div>
+                <div className="label">Player {TURNS.X}</div>
+            </div>
+            <div className="divider"></div>
+            <div className="stat">
+                <div className="number">{scores.playerO}</div>
+                <div className="label">Player {TURNS.O}</div>
+            </div>
+            <div className="divider"></div>
+            <div className="stat">
+                <div className="number">{scores.ties}</div>
+                <div className="label">Draws</div>
+            </div>
+            </div>
         </section>
     )
 }

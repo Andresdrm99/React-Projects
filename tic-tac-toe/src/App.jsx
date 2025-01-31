@@ -1,17 +1,18 @@
 import { useState } from 'react'
-import { Square } from './components/square'
 import { TURNS } from './constants'
 import { checkWinner, checkGame } from './logic/board'
 import { Result } from './components/result'
 import { GameBoard } from './components/gameBoard'
-import { saveGame, clearBoard } from './logic/storage'
+import { saveGame, clearBoard, saveScore } from './logic/storage'
+import  restart  from './assets/restaart.svg'
+import  logo  from './assets/Logo.png'
+import  tictactoe  from './assets/background-logo.png'
 import './App.css'
 
 
 function App() {
   const [board, setBoard] = useState (()=>{
     const boardSaved = window.localStorage.getItem('board')
-    console.log(boardSaved);
       return  boardSaved ? JSON.parse(boardSaved) : Array(9).fill(null)
   })
   
@@ -19,6 +20,20 @@ function App() {
     const turnSaved = window.localStorage.getItem('turn')
       return  turnSaved ? JSON.parse(turnSaved) : TURNS.X
   })
+
+  const [scores, setScores] = useState( () => {
+    const scoreSaved = window.localStorage.getItem('score');
+    return  scoreSaved ? JSON.parse(scoreSaved) : {  playerX: 0, playerO: 0, ties: 0}
+  });
+
+  const incrementScore = (player) => {
+    const addPointsTo = player === false ? 'ties' : player === TURNS.X ?  'playerX': 'playerO'
+    setScores((prevScores) => ({
+      ...prevScores,
+      [addPointsTo]: prevScores[addPointsTo] + 1,
+    }));
+    saveScore(scores);
+  };
 
   const [winner, setWinner] = useState(null)
 
@@ -36,16 +51,19 @@ function App() {
     saveGame({board:newBoard,turn:newTurn})
    
     const win = checkWinner(newBoard);
+    
     if(win){
       setWinner(win)
+      incrementScore(win)
     }
     else if (checkGame(newBoard)){
       setWinner(false)
+      incrementScore(false)
     }
   }
 
   const playAgain = () => {
-    setTurn(winner !== null ? winner : TURNS.X )
+    setTurn(TURNS.X)
     setWinner(null)
     setBoard(Array(9).fill(null))
 
@@ -56,15 +74,12 @@ function App() {
   return (
     <>
       <main className='board'>
-        <button onClick={playAgain}>Restart</button>
+        <img className='game-logo' src={logo}></img>
+        <Result winner={winner}  turn={turn} scores={scores}/>
         <GameBoard board={board} updateBoard={updateBoard}/>
-        <section className='turn'>
-          <Square isSelected = {turn === TURNS.X}>{TURNS.X}</Square>
-          <Square isSelected = {turn === TURNS.O}>{TURNS.O}</Square>
-        </section>
+        <button className="restart-button" onClick={playAgain}><img src={restart} alt="Logo" /> Play again</button>
       </main>
-      
-      <Result winner={winner}  playAgain={playAgain} />
+      <img className='fixed-image' src={tictactoe}></img>
     </>
   )
 }
