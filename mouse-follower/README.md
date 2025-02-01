@@ -1,8 +1,21 @@
-# React + Vite
+# 🖱️ Mouse Follower
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a simple **Mouse Follower** built with **React**. It demonstrates how to track the mouse position dynamically using the `useEffect` hook, along with basic event handling to create an interactive UI element that follows the cursor in real-time.
 
-Currently, two official plugins are available:
+## 🚀 Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Real-Time Cursor Tracking:** Smooth movement of elements following the mouse.
+- **React Hooks:** Implementation of `useEffect` to manage event listeners efficiently.
+- **Responsive Design:** Works seamlessly across different screen sizes.
+- **Clean Code Structure:** Easy-to-read and maintainable code.
+
+## 🎥 Demo
+
+![Mouse Follower Demo](./src/assets/demo.gif)
+
+## 💡 Technologies Used
+
+- **React** – For building the UI.
+- **JavaScript (ES6+)** – Core logic implementation.
+- **CSS** – For styling the follower element.
+
