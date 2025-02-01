@@ -1,8 +1,15 @@
-# React + Vite
+#Tic Tac Toe
+[Look and Feel](./src/assets/lookandfeel.PNG)
+This is a simple yet engaging Tic Tac Toe game built with React. The goal of this project is to showcase my skills in state management, game logic implementation, and creating interactive user interfaces. It was designed with clean code principles and a focus on usability, making it an ideal addition to my development portfolio.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🎯 Project Overview
+The game allows two players to take turns marking spaces in a 3x3 grid, aiming to get three of their marks in a row—horizontally, vertically, or diagonally. The logic efficiently handles turn switching, winner detection, and draw conditions.
 
-Currently, two official plugins are available:
+✨ Features
+Responsive Design: Works seamlessly on desktop and mobile devices.
+- Game Logic: Detects winners and draws automatically.
+- State Management: Utilizes React's useState for dynamic UI updates.
+- Reset Functionality: Restart the game instantly without refreshing the page.
+- Clean Codebase: Modular components and readable code for easy maintenance.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is part of my portfolio to demonstrate my ability to build interactive web applications using React.

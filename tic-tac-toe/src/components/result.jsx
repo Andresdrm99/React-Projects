@@ -9,12 +9,12 @@ export function Result ({winner, turn, scores})
             <div className="stats-container">
             <div className="stat">
                 <div className="number">{scores.playerX}</div>
-                <div className="label">Player {TURNS.X}</div>
+                <div className="label playerX">Player {TURNS.X}</div>
             </div>
             <div className="divider"></div>
             <div className="stat">
                 <div className="number">{scores.playerO}</div>
-                <div className="label">Player {TURNS.O}</div>
+                <div className="label playerO">Player {TURNS.O}</div>
             </div>
             <div className="divider"></div>
             <div className="stat">

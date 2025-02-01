@@ -7,8 +7,6 @@ import { saveGame, clearBoard, saveScore } from './logic/storage'
 import  restart  from './assets/restaart.svg'
 import  logo  from './assets/Logo.png'
 import  tictactoe  from './assets/background-logo.png'
-import './App.css'
-
 
 function App() {
   const [board, setBoard] = useState (()=>{
