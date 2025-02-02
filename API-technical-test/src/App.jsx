@@ -1,24 +1,10 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { getRandomFact } from './services/facts'
 
-const FACT_ENDPOINT = 'https://catfact.ninja/fact'
-const IMG_ENDPOINT = 'https://cataas.com/cat/says/'
 
-function App() {
-  const [fact, setFact] = useState( )
+function useCatImage({fact}){
   const [imageURL, setImageURL] = useState()
-
-  useEffect(()=>{
-    fetch(FACT_ENDPOINT )
-    .then(res => res.json())
-    .then(data => {
-      setFact(data.fact)
-    }
-  )
-   
-  }, [])
 
   useEffect(()=>{
     if(!fact) return
@@ -33,11 +19,27 @@ function App() {
     })
     console.log(fact, imageURL)
   },[fact])
+}
+
+
+function App() {
+  const [fact, setFact] = useState()
+  const imageURL = useCatImage({fact})
+  
+  useEffect(()=>{
+    getRandomFact().then(newFact => setFact(newFact))
+  }, [])
+
+  const generateFact = async ()=>{
+    const newFact = await getRandomFact()
+    setFact(newFact)
+  }
 
   return (
     <>
       <main>
         <h1>Technical test</h1>
+        <button onClick={generateFact}>Get new fact</button>
         <p>{fact}</p>
         { imageURL && <img src={`${imageURL}`} alt={`Image generate with the first word of the fact ${fact}`}></img>}
       </main>
