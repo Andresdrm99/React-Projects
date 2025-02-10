@@ -7,12 +7,9 @@ export const Follower = ()=>{
   const [positionToFollow, setPositionToFollow] = useState({x: 0, y:0})
 
   useEffect(()=>{
-    console.log('efecto', enabled)
-  
     const handleMove = (event) =>{
       const {clientX, clientY} = event
       setPositionToFollow({x:clientX, y: clientY})
-      console.log('handleMove', {clientX, clientY})
     }
   
     if(enabled){

@@ -1,23 +1,34 @@
-import { useState } from 'react'
-import MoviesFound from '../mocks/found.json'
-import noMovies from '../mocks/not-found.json'
+import { useRef, useState, useMemo } from 'react'
+import {getMovies} from '../services/getMovies.js'
 
-export function useMovies(search) {
-  const [responseMovies, setResponseMovies] = useState([])
+export function useMovies({search, sort}) { 
+  const [movies, setMovies] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const previousSearch = useRef({search})
+  
+  const getSearchMovies = useMemo(() => {
+    return async ({search}) => {
+      if(search === previousSearch) return 
+      try{
+        setError(null)
+        setLoading(true)
+        previousSearch.current = search
+        const searchMovies = await getMovies({search})
+        setMovies(searchMovies)
+      } catch(e){
+        setError(e.message)
+      }
+      finally{
+        setLoading(false)
+      }
+    }
+  },[])
 
-  const movies = responseMovies.Search || []
+  const sortMovies = useMemo(()=>{
+    return sort ? [...movies].sort((a,b) => a.title.localeCompare(b.title)) : movies
+  }) 
 
-  const mappedMovies = movies?.map( movie =>({
-    id: movie.imdbID,
-    title: movie.Title,
-    year: movie.Year,
-    poster: movie.Poster
-  }))
-
-   async function getMovies() {
-    
-  }
-
-  return {movies:mappedMovies, getMovies}
+  return {movies: sortMovies ,getSearchMovies, loading}
 }
 

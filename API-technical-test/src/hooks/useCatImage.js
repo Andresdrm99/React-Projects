@@ -8,7 +8,6 @@ export function useCatImage({fact}){
     if(!fact) return
 
     const threeFirstWords = fact.split(' ', 3).join(' ')
-    console.log(threeFirstWords)
     fetch(`https://cataas.com/cat/says/${threeFirstWords}?size=50&color=red`)
     .then(response => {
       const url = response.url
