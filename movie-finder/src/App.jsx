@@ -1,6 +1,9 @@
 import { Movies } from './components/movies'
 import { useState, useEffect, useRef } from 'react'
 import { useMovies } from './hooks/useMovies'
+import  calendar  from './assets/calendar.svg'
+import logo from './assets/Logo.png'
+import searchIcon from './assets/searchIcon.svg'
 import './App.css'
 
 export function useSearch(){
@@ -43,7 +46,7 @@ function App() {
 
   const handleSubmit = (event) =>{
     event.preventDefault()
-    getSearchMovies()
+    getSearchMovies({ search })
   }
 
   function handleChange(event){
@@ -53,12 +56,12 @@ function App() {
   return (
     <div className='page'>
     <header>
-      <h1>Movie Finder</h1>
+    <img  className="logo" src={logo} alt="Logo" />
       <div>
         <form className='form' onSubmit={handleSubmit}>
-          <input onChange={handleChange} name="query" value={search}placeholder='Star Wars, Lord of Rings, Cars ... '></input>
-          <button type='submit'>Search </button>
-          <input type='checkbox' onChange={()=>setSort(!sort)} checked={sort}/>
+          <input className='inputSearch' onChange={handleChange} name="query" value={search} placeholder='Star Wars, Lord of Rings, Cars ... '></input>
+          <button type='submit' className='searchButton'><img src={searchIcon} alt="Logo" /></button>
+          <buton onClick={()=>setSort(!sort)}><img src={calendar} alt="Logo" /></buton>
         </form>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
@@ -66,7 +69,6 @@ function App() {
     <main>
       {loading ? <p>Cargando</p> : <Movies movies={movies} />}
     </main>
- 
     </div>
   )
 }

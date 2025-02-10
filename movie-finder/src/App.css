@@ -1,3 +1,9 @@
+header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .page{
   display: flex;
   justify-content: center;
@@ -5,10 +11,19 @@
   flex-direction: column;
 }
 
+.logo{
+  margin-bottom: 20px;
+  width: 245px;
+  height: 70px;
+}
+
 .form{
   display: flex;
   justify-content: center;
+  text-align: center;
   align-items: center;
+  width: 100%;
+  gap:6px
 }
 
 main{
@@ -24,17 +39,52 @@ main{
   width: 100%;
   margin: 0;
   padding: 0;
+  margin-top: 32px;
   gap: 32px;
+}
+
+.inputSearch{
+  background-color: #22262B;
+  width: 327px;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.searchButton{
+  width: 40px;
+  height: 40px;
+  background-color: #A00000;
+  border-radius: 50%; /* Hace que sea un círculo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none; /* Eliminar bordes extra */
+  cursor: pointer;
+  padding: 0;
+  color:white
+}
+
+.searchButton img{
+  height: 30px;
+  width: 30px;
+}
+
+.searchButton::placeholder{
+  color: #2C333A;
+}
+
+.searchButton:hover {
+  background-color: rgb(117, 20, 20);
 }
 
 .movie{
   display: flex;
   flex-direction: column;
-  align-items: center;
   text-align: center;
   border-radius: 8px;
   overflow: hidden; 
   height: 100%;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .movie h2, .movie p {
@@ -51,10 +101,60 @@ main{
   box-sizing: border-box; 
 }
 
+.movie .poster{
+  width: 300px;
+  height: 350px;
+}
+
 
 .movie img {
   width: 100%;
   height: auto; 
   display: block; 
   object-fit: cover;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #007BFF;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
 }
